@@ -1,2 +1,3 @@
-# Tic-Tac-Toe
-Tic Tac Toe game using Python 3 and pygame module
+Tic Tac Toe game made using python 3.5 and the pygame module.
+
+PS - at this point in the multiplayer mode computer makes random guesses ,will update it to use Minimax and alpha-beta pruning
