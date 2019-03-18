@@ -1,6 +1,5 @@
-import pygame
-import time
-import random
+import pygame, time,random
+from container_mod import *
 
 pygame.init()
 gameDisplay= pygame.display.set_mode((800,600))
@@ -63,42 +62,7 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
-class containers:
-    '''The nine places where X and O go are the containers'''
-    count=-1
-    def __init__(self,upper_x,lower_x,upper_y,lower_y):
-        self.chk=0; # implies that 0 interactions have taken place
-        containers.count+=1
-        self.number=containers.count
-        self.upper_x=upper_x
-        self.upper_y=upper_y
-        self.lower_x=lower_x
-        self.lower_y=lower_y
-        self.filler=None
-
-    def drawCross(self):
-        '''Draws crosses takes width and height of surrounding box as input'''
-        #x,y are center of box
-        self.filler='x'
-        self.chk=1
-
-    def drawNought(self):
-        '''Draws nought takes center of box as argument'''
-        self.filler='y'
-        self.chk=1
-
-# init ALL containing all the containers
-ALL=[]
-ALL.append(containers(300,100,233,100))
-ALL.append(containers(500,300,233,100))
-ALL.append(containers(700,500,233,100))
-ALL.append(containers(300,100,366,233))
-ALL.append(containers(500,300,366,233))
-ALL.append(containers(700,500,366,233))
-ALL.append(containers(300,100,499,366))
-ALL.append(containers(500,300,499,366))
-ALL.append(containers(700,500,499,366))
-
+init_ALL()
 
 def reset():
     '''Resets all the global variables .Is called each time a new game starts'''
