@@ -17,7 +17,7 @@ bright_green=(0,255,0)
 blue=(0,0,200)
 bright_blue=(0,0,255)
 yellow=(255,255,0)
-gold=(255,215,0)
+gold=(255,190,0)
 
 turn='x'
 move=None #for singleplayer game determines who goes next
@@ -157,8 +157,8 @@ def gameIntro():
         gameDisplay.blit(TextSurf, TextRect)
 
         button("Singleplayer",170,450,110,40,green,bright_green,beforeSingle)
-        button("Multiplayer",570,450,110,40,yellow,gold,multiGameLoop)
-        button("QUIT",370,510,60,40,red,bright_red,quitGame)
+        button("Multiplayer",570,450,110,40,gold,yellow,multiGameLoop)
+        button("QUIT",400,510,60,40,red,bright_red,quitGame)
 
         pygame.display.update()
         clock.tick(10)
