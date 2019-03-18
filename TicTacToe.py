@@ -23,6 +23,7 @@ turn='x'
 move=None #for singleplayer game determines who goes next
 firstMove=None
 msg=" "
+win_row=None #stores the winning row tuple from WAYS_TO_WIN
 
 def quitGame():
     '''Quits the game'''
@@ -101,13 +102,15 @@ ALL.append(containers(700,500,499,366))
 
 def reset():
     '''Resets all the global variables .Is called each time a new game starts'''
-    global move,turn,firstMove
+    global move,turn,firstMove,msg
     for container in ALL:
         container.chk=0
         container.filler=None
     move=None
     firstMove=None
     turn='x'
+    win_row=None
+    msg=" "
 
 def drawRoutine(i):
     '''Calls the needed draw function of the needed class'''
@@ -187,40 +190,43 @@ def chkWinner():
         if(row[0].filler==row[1].filler==row[2].filler!=None):
             if(row[0].filler=='x'):
                 winner='X'
+                win_row=row
             else :
                 winner='O'
+                win_row=row
         if(winner is None):
             winner ='TIE'
+            win_row=None
 
     if(move is None): #this one is for multiGameLoop (move is always reset and is not changed in multiGameLoop)
         if(winner=='X'):
             msg="X Won"
-            afterGame()
+            return win_row
         elif(winner=='O'):
             msg="O Won"
-            afterGame()
+            return win_row
         elif(winner=='TIE'):
             msg="TIE"
-            afterGame()
+            win_row=None
 
     else : #this one is for singleplayer as its value will be changed and will not be none
         if(winner=='X'):
             if(firstMove=="HUMAN"):
                 msg="You Won"
-                afterGame()
+                return win_row
             else :
                 msg="You Lost"
-                afterGame()
+                return win_row
         elif(winner=='O'):
             if(firstMove=="CPU"):
                 msg="You Won"
-                afterGame()
+                return win_row
             else :
                 msg="You Lost"
-                afterGame()
+                return win_row
         elif(winner=='TIE'):
             msg="TIE"
-            afterGame()
+            return win_row
 
 
 
@@ -284,9 +290,20 @@ def singleGameLoop():
                 else:
                     pygame.draw.circle(gameDisplay, white,((container.upper_x+container.lower_x)//2,(container.lower_y+container.upper_y)//2),50,5)
 
-        chkWinner()
-
         pygame.display.update()
+
+        win_row=chkWinner()
+
+        if win_row is None:
+            if msg is 'TIE':
+                time.sleep(0.5)
+                afterGame()
+        else :
+            pygame.draw.line(gameDisplay,red,((win_row[0].upper_x+win_row[0].lower_x)//2,(win_row[0].lower_y+win_row[0].upper_y)//2),((win_row[2].upper_x+win_row[2].lower_x)//2,(win_row[2].lower_y+win_row[2].upper_y)//2),7)
+            pygame.display.update()
+            time.sleep(1.5)
+            afterGame()
+
         clock.tick(10)
       
 def beforeSingle():
@@ -333,14 +350,23 @@ def multiGameLoop():
                     pygame.draw.line(gameDisplay,white,(container.upper_x-15,container.upper_y-15),(container.lower_x+15,container.lower_y+15),5)
                 else:
                     pygame.draw.circle(gameDisplay, white,((container.upper_x+container.lower_x)//2,(container.lower_y+container.upper_y)//2),50,5)
-        chkWinner()
-
-
-
+                    
         pygame.display.update()
+
+        win_row=chkWinner()
+
+        if win_row is None:
+            if msg is 'TIE':
+                time.sleep(0.5)
+                afterGame()
+        else :
+            pygame.draw.line(gameDisplay,red,((win_row[0].upper_x+win_row[0].lower_x)//2,(win_row[0].lower_y+win_row[0].upper_y)//2),((win_row[2].upper_x+win_row[2].lower_x)//2,(win_row[2].lower_y+win_row[2].upper_y)//2),7)
+            pygame.display.update()
+            time.sleep(1.5)
+            afterGame()
+
         clock.tick(10)
 
- 
 
 
 #main
