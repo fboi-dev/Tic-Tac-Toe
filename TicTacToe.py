@@ -1,5 +1,6 @@
 import pygame, time,random
-from container_mod import *
+from containers import *
+import minimax
 
 pygame.init()
 gameDisplay= pygame.display.set_mode((800,600))
@@ -62,7 +63,10 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
-init_ALL()
+#initializing list of containers 'ALL'
+ALL=[]
+initContainerList(ALL) #function defined in containers.py
+
 
 def reset():
     '''Resets all the global variables .Is called each time a new game starts'''
@@ -75,6 +79,9 @@ def reset():
     turn='x'
     win_row=None
     msg=" "
+    minimax.previousBoard = []
+    minimax.currentNode=None
+
 
 def drawRoutine(i):
     '''Calls the needed draw function of the needed class'''
@@ -210,12 +217,17 @@ def NO():
 
 def computerMove():
     '''Determines the 'CPU' move'''
+    #for random move use the following
+    '''
     LEGAL_MOVES=[]
     for container in ALL:
         if(container.chk==0):
             LEGAL_MOVES.append(container.number)
-    k=random.choice(LEGAL_MOVES)
-    drawRoutine(k)
+    pos=random.choice(LEGAL_MOVES)
+    '''
+
+    pos=minimax.intelligentMove1(firstMove,ALL)
+    drawRoutine(pos)
 
 
 def singleGameLoop():
@@ -334,4 +346,5 @@ def multiGameLoop():
 
 
 #main
+minimax.buildGameTree()
 gameIntro()

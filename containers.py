@@ -9,6 +9,7 @@ class containers:
         self.upper_y=upper_y
         self.lower_x=lower_x
         self.lower_y=lower_y
+        #filler is the value that is in the container
         self.filler=None
 
     def drawCross(self):
@@ -23,9 +24,8 @@ class containers:
         self.chk=1
 
 # init ALL containing all the containers
-ALL=[]
-def init_ALL():
-    global ALL
+
+def initContainerList(ALL):
     ALL.append(containers(300,100,233,100))
     ALL.append(containers(500,300,233,100))
     ALL.append(containers(700,500,233,100))
@@ -35,4 +35,7 @@ def init_ALL():
     ALL.append(containers(300,100,499,366))
     ALL.append(containers(500,300,499,366))
     ALL.append(containers(700,500,499,366))
+
+if __name__ == "__main__":
+    print("Not to executed alone. Stores Data Structures for Tic Tac Toe game")
 
