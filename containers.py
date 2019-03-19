@@ -20,7 +20,7 @@ class containers:
 
     def drawNought(self):
         '''Draws nought takes center of box as argument'''
-        self.filler='y'
+        self.filler='o'
         self.chk=1
 
 # init ALL containing all the containers

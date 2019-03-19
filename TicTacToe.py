@@ -1,4 +1,4 @@
-import pygame, time,random
+import pygame, time,random,copy
 from containers import *
 import minimax
 
@@ -79,9 +79,7 @@ def reset():
     turn='x'
     win_row=None
     msg=" "
-    minimax.previousBoard = []
-    minimax.currentNode=None
-
+    
 
 def drawRoutine(i):
     '''Calls the needed draw function of the needed class'''
@@ -216,6 +214,7 @@ def NO():
     singleGameLoop()
 
 def computerMove():
+    global turn,ALL
     '''Determines the 'CPU' move'''
     #for random move use the following
     '''
@@ -225,8 +224,8 @@ def computerMove():
             LEGAL_MOVES.append(container.number)
     pos=random.choice(LEGAL_MOVES)
     '''
-
-    pos=minimax.intelligentMove1(firstMove,ALL)
+    temp=copy.deepcopy(ALL)
+    pos=minimax.intelligentMove(turn,temp)
     drawRoutine(pos)
 
 
@@ -346,5 +345,4 @@ def multiGameLoop():
 
 
 #main
-minimax.buildGameTree()
 gameIntro()
