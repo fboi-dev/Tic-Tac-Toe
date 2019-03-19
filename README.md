@@ -1,3 +1,4 @@
 Tic Tac Toe game made using python 3.5 and the pygame module.
+Computer makes it move using the Minimax algorithm
 
-PS - at this point in the multiplayer mode computer makes random guesses ,will update it to use Minimax and alpha-beta pruning
+Before running this you might want to install [pygame](https://www.pygame.org/download.shtml) (if you don't have it) from here 
