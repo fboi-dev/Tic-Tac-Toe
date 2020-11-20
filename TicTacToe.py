@@ -42,6 +42,8 @@ def drawBoard():
     pygame.draw.line(gameDisplay, blue,(500,499),(500,100),5)
     pygame.draw.line(gameDisplay, blue,(100,366),(700,366),5)
     pygame.draw.line(gameDisplay, blue,(100,233),(700,233),5)
+    
+
 
 def button(msg,x,y,w,h,ic,ac,action=None):
     '''Draws inteactive buttons and binds them to corresponding funtions'''
